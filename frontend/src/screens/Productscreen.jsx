@@ -1,0 +1,72 @@
+import React from 'react';
+import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import Rating from '../components/Rating';
+import products from '../product';
+
+const Productscreen = () => {
+  const { id } = useParams();
+  const product = products.find((prod) => prod._id === id);
+
+  return (
+    <div>
+      <Link to='/' className='btn btn-outline-dark my-3'>
+        Go Back
+      </Link>
+      <Row>
+        {/* md={6 }*/}
+        <Col md={6}>
+          <Image src={product.image} alt={product.name} fluid />
+        </Col>
+        {/* md={md3} */}
+        <Col md={3}>
+          <ListGroup variant='flush'>
+            <ListGroup.Item>
+              <h3>{product.name}</h3>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Rating
+                value={product.rating}
+                text={`${product.numReviews} reviews`}
+              />
+            </ListGroup.Item>
+            <ListGroup.Item>Price: {product.price}</ListGroup.Item>
+            <ListGroup.Item>Description: {product.description}</ListGroup.Item>
+          </ListGroup>
+        </Col>
+        {/* md={md3} */}
+        <Col md={3}>
+          <Card>
+            <ListGroup variant='flush'>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Price: </Col>
+                  <Col>{product.price} </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  <Col>Stock</Col>
+                  <Col>
+                    {product.countInStock > 0 ? 'in stock' : 'out of stock'}{' '}
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item className='d-grid gap-2'>
+                <button
+                  className='btn btn-primary'
+                  type='button'
+                  disabled={product.countInStock === 0}
+                >
+                  Add To cart
+                </button>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+export default Productscreen;

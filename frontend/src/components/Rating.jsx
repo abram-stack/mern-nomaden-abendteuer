@@ -1,5 +1,4 @@
 import React from 'react';
-import { FaRegStar, FaRegStarHalf, FaStar } from 'react-icons/fa';
 
 const Rating = ({ value, color, text }) => {
   return (
@@ -8,7 +7,7 @@ const Rating = ({ value, color, text }) => {
         {[...Array(5)].map((_, i) => {
           const cls =
             value >= i + 1
-              ? 'fas fa-star' //full star
+              ? 'fa-solid fa-star' //full star
               : value >= i + 0.5
               ? 'fas fa-star-half-alt' //half star
               : 'far fa-star'; //empty star
