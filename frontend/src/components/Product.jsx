@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Rating from './Rating';
 
 const Product = ({ product }) => {
@@ -34,7 +33,4 @@ const Product = ({ product }) => {
   );
 };
 
-Product.propTypes = {
-  product: PropTypes.object,
-};
 export default Product;
