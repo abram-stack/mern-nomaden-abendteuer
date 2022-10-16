@@ -1,10 +1,15 @@
-const express = require('express');
-const products = require ('./data/product');
+import express from 'express';
+import dotenv from 'dotenv'
+import connectDB from './config/db.js';
+import products from './data/product.js'
 
+dotenv.config();
+
+connectDB();
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('hello from backend')
+  res.send('hello from backend test' )
 });
 
 app.get('/api/products', (req, res) => {
@@ -16,6 +21,7 @@ app.get('/api/products/:id', (req, res) => {
   res.send(product)
 })
 
-app.listen(5000, console.log('server listening to port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen( PORT, console.log(`server listening on port ${PORT} in ${process.env.NODE_ENV}`));
 
 // const port = 8080;
