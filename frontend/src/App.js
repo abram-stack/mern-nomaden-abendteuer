@@ -17,7 +17,12 @@ function App() {
           <Routes>
             <Route exact path='/' element={<Homescreen/>} />
             <Route path='/product/:id' element={<Productscreen />} />
-            <Route path='/cart' element={<Cartscreen />} />
+              {/* <Route path='/cart/:id?' element={<Cartscreen />} /> */}
+             
+           <Route path='/cart'>
+              <Route path='' element={<Cartscreen/>} />
+              <Route path=':id' element={<Cartscreen/>} />
+           </Route> 
             <Route path='/signin' element={<Signinscreen/>}/>
           </Routes>
         </Container>
