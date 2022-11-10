@@ -3,20 +3,26 @@ import axios from 'axios';
 import { Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import Rating from '../components/Rating';
+import { useDispatch, useSelector } from 'react-redux';
+import { detailProduct } from '../actions/productActions';
 
 const Productscreen = () => {
   const { id } = useParams();
+  //const [product, setProduct] = useState([]);
+  const dispatch = useDispatch();
+  const productDetail = useSelector((state) => state.productDetail);
 
-  const [product, setProduct] = useState([]);
+  const { loading, product, error } = productDetail;
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get(`/api/products/${id}`);
-      setProduct(data);
-    };
+    // const fetchProduct = async () => {
+    //   const { data } = await axios.get(`/api/products/${id}`);
+    //   setProduct(data);
+    // };
 
-    fetchProduct();
-  }, []);
+    // fetchProduct();
+    dispatch(detailProduct(id));
+  }, [dispatch, id]);
 
   // const product = products.find((prod) => prod._id === id);
 

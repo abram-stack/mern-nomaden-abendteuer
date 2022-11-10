@@ -9,49 +9,54 @@ const reviewSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-const productSchema = mongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'User',
+      // required: true,
+    },
+    name: {
+      type: String,
+      required: true
     },
     image: {
       type: String,
-      required: true,
-    },
-    brand: {
-      type: String,
-      required: true,
-    },
-    category: {
-      type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,
-      required: true,
+      //required: true
     },
-    review: [reviewSchema],
+    brand: {
+      type: String,
+      // required: true,
+    },
+    baujahr: {
+      type: Number,
+      // required: true
+    },
+    countInStock: {
+      type: Number,
+      // required: true,
+      default: 0,
+    },
     rating: {
-      type: Boolean,
-      required: true,
+      type: Number,
+      // required: true,
       default: false,
     },
     numReviews: {
       type: Number,
-      required: true,
+      // required: true,
     },
     price: {
       type: Number,
-      required: true,
+      // required: true,
       default: 0,
     },
-    countInStock: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
+    review: [reviewSchema],
+    
   },
   { timestamps: true }
 );
