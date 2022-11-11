@@ -15,7 +15,7 @@ import { detailProduct } from '../actions/productActions';
 
 const Productscreen = ({ history }) => {
   const { id } = useParams();
-  const [qty, setQty] = useState();
+  const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,6 +30,9 @@ const Productscreen = ({ history }) => {
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);
+    //BUG and NOT safe to put input in URL, clients can manipulate the qty
+    //TODO: directly call action instead of using param. Basically: onChange in formControl, and here
+    // and navigate /cart
   };
 
   // const product = products.find((prod) => prod._id === id);
@@ -88,7 +91,7 @@ const Productscreen = ({ history }) => {
                         style={{ padding: '0.75rem 0.2rem 0.75rem 0.4rem' }}
                         as='select'
                         value={qty}
-                        onChange={(e) => setQty(e.target.value)}
+                        onChange={(e) => setQty(e.target.value)} //TODO: dispatch action here instead and navigate to '/cart'
                       >
                         {[...Array(product.countInStock).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>

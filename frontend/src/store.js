@@ -1,13 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
 import { productDetailReducer, productListReducer } from './reducers/productReducers'
-
+import { cartReducer } from './reducers/cartReducers'
 
 const reducers = {
   productList: productListReducer,
-  productDetail: productDetailReducer
+  productDetail: productDetailReducer,
+  cart: cartReducer,
 };
-const initialState = {};
+
+const cartItemsFromLocalStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
+
+const initialState = {
+  cart: {cartItems: cartItemsFromLocalStorage}
+};
 const middleware = [thunk]
 
 
