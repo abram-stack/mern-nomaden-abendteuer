@@ -30,7 +30,7 @@ const Productscreen = ({ history }) => {
 
   const addToCartHandler = () => {
     navigate(`/cart/${id}?qty=${qty}`);
-    //BUG and NOT safe to put input in URL, clients can manipulate the qty
+    //FIXME: BUG and NOT safe to put input in URL, clients can manipulate the qty
     //TODO: directly call action instead of using param. Basically: onChange in formControl, and here
     // and navigate /cart
   };
