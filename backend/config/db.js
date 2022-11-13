@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { async } from "rxjs";
 
 const connectDB = async() => {
   try {

@@ -1,4 +1,5 @@
 import User from "../models/userModel.js";
+import jwt from 'jsonwebtoken'
 
 //@desc get all users
 //@route /api/users
@@ -26,7 +27,7 @@ const authUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        token:  null
+        token:  generateToken(user._id)
       })
     } else {
       res.status(401);
@@ -37,4 +38,8 @@ const authUser = async (req, res, next) => {
   }
 }
 
+const generateToken = (id) => {
+  const token = jwt.sign({ id }, process.env.JSON_SECRET, {expiresIn: '30d'});
+  return token;
+}
 export { authUser, getUsers}
