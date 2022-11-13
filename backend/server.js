@@ -7,13 +7,17 @@ import bodyParser from 'body-parser';
 
 //router
 import productRouter from './routes/productRoutes.js'
-import { notFound, errorHandler} from './middleware/errorMiddleware.js'
-dotenv.config();
+import userRouter from './routes/userRoutes.js'
 
+//middlware
+import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+
+
+dotenv.config();
 connectDB();
 const app = express();
 
-
+// accept Json data in body of html request
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -28,7 +32,10 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/products', productRouter);
+app.use('/api/users',userRouter);
 
+
+//ERROR Middleware
 app.use(notFound);
 app.use(errorHandler);
 

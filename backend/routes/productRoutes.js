@@ -7,14 +7,14 @@ router.route('/').get(getProducts)
 
 router.route('/:id').get(getProduct);
 
-router.post('/', async (req, res) => { 
-  try {
-    const product = await Product.create(req.body);
-    res.status(200).send(product);
-  } catch (error) {
-    res.status(500).json({error: error})
-  }
+// router.post('/', async (req, res) => { 
+//   try {
+//     const product = await Product.create(req.body);
+//     res.status(200).send(product);
+//   } catch (error) {
+//     res.status(500).json({error: error})
+//   }
   
-})
+// })
 
 export default router;
