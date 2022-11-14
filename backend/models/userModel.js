@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import bcrypt  from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 const userSchema = mongoose.Schema(
   {
@@ -29,9 +29,19 @@ const userSchema = mongoose.Schema(
 // in mongoose: we use the schema object, call its "methods" and we define our "function"
 // we can call this "function" from an object created,
 //arrow function can only access this as parent class. not as the object
-userSchema.methods.matchPassword = async function(password) {
+userSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
-}
+};
+
+//middlware to hash the password
+//so we have to pass next
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model('User', userSchema);
 export default User;
