@@ -27,7 +27,7 @@ const authUser = async (req, res, next) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-        token:  generateToken(user._id)
+        token: generateToken(user._id),
       })
     } else {
       res.status(401);
@@ -38,8 +38,21 @@ const authUser = async (req, res, next) => {
   }
 }
 
+//@desc get user profile
+//@route GET/api/users/profile
+//@access private
+const getUserProfile = async(req, res) => {
+  //TODO: 
+  //if we get the user, (that passed the test: user has the correct token) middleware
+  //show user's info
+  const user = req.user;
+  res.json({user})
+}
+
+
 const generateToken = (id) => {
-  const token = jwt.sign({ id }, process.env.JSON_SECRET, {expiresIn: '30d'});
+  //the function takes param({desired of field name})
+  const token = jwt.sign({ id}, process.env.JSON_SECRET, {expiresIn: '30d'});
   return token;
 }
-export { authUser, getUsers}
+export { authUser, getUsers, getUserProfile}
