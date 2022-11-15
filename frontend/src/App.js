@@ -5,7 +5,7 @@ import Homescreen from './screens/Homescreen';
 import { BrowserRouter as Router,  Route, Routes} from 'react-router-dom'
 import Productscreen from './screens/Productscreen';
 import Cartscreen from './screens/Cartscreen';
-import Signinscreen from './screens/Signinscreen';
+import LoginScreen from './screens/LoginScreen';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
               <Route path='' element={<Cartscreen/>} />
               <Route path=':id' element={<Cartscreen/>} />
            </Route> 
-            <Route path='/signin' element={<Signinscreen/>}/>
+            <Route path='/login' element={<LoginScreen/>}/>
           </Routes>
         </Container>
       </main>

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { detailProduct } from '../actions/productActions';
 import { addToCart } from '../actions/cartActions';
 
-const Productscreen = ({ history }) => {
+const Productscreen = () => {
   const { id } = useParams();
   const [qty, setQty] = useState(1);
 

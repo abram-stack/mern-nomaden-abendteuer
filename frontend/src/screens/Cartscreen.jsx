@@ -32,6 +32,7 @@ const Cartscreen = () => {
 
   const checkOutHandler = () => {
     //TODO: proceed to log in if not logged in and to shipping if logged in
+    //if user not logged id, the redirect will be appended into url, we need to catch that in login
     navigate(`/login?redirect=shipping`);
   };
   return (
