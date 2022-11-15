@@ -4,9 +4,10 @@ import {
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_REQUEST,
   PRODUCT_DETAIL_REQUEST,
+  PRODUCT_DETAIL_SUCCESS
 } from '../constants/productConstants';
 import axios from 'axios';
-import { PRODUCT_DETAIL_SUCCESS } from '../constants/productConstants';
+
 
 //think as action creator
 //we will use async function. we need thunk

@@ -12,6 +12,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import Rating from '../components/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailProduct } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 
 const Productscreen = ({ history }) => {
   const { id } = useParams();
@@ -29,13 +30,11 @@ const Productscreen = ({ history }) => {
   }, [dispatch, id]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`);
-    //FIXME: BUG and NOT safe to put input in URL, clients can manipulate the qty
     //TODO: directly call action instead of using param. Basically: onChange in formControl, and here
     // and navigate /cart
+    dispatch(addToCart(product._id, qty));
+    navigate('/cart');
   };
-
-  // const product = products.find((prod) => prod._id === id);
 
   return (
     <div>

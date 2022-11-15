@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -17,23 +17,13 @@ import { addToCart, removeFromCart } from '../actions/cartActions';
 const Cartscreen = () => {
   //TODO: changing naming conventions from products to _id as ID, more consistency
   //since we dont use/ sending info over params,
-  //TODO: remove params, and remove the use of useEffect
-  const { id } = useParams();
-  const location = useLocation();
-  const navigate = useNavigate();
 
-  const qty = Number(new URLSearchParams(location.search).get('qty'));
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
-
-  useEffect(() => {
-    if (id) {
-      dispatch(addToCart(id, qty));
-    }
-  }, [dispatch, id, qty]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
