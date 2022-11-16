@@ -63,13 +63,17 @@ const createUser = async (req, res, next) => {
       throw new Error('User is already exist');
     }
 
+    if (name === '' || email === '' || password === '') {
+      res.status(500);
+      throw new Error('Name, email and password cannot be empty');
+    }
+    
     //create user
     const user = await User.create({
       name,
       email,
       password,
     });
-
     if (user) {
       res.status(201).json({
         _id: user._id,

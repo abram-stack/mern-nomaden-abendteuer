@@ -6,6 +6,7 @@ import { BrowserRouter as Router,  Route, Routes} from 'react-router-dom'
 import Productscreen from './screens/Productscreen';
 import Cartscreen from './screens/Cartscreen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
               <Route path='' element={<Cartscreen/>} />
               <Route path=':id' element={<Cartscreen/>} />
            </Route> 
-            <Route path='/login' element={<LoginScreen/>}/>
+            <Route path='/login' element={<LoginScreen />} />
+            <Route path='/register' element={<RegisterScreen />}/>
           </Routes>
         </Container>
       </main>
