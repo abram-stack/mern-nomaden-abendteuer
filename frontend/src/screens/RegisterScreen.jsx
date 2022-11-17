@@ -41,14 +41,6 @@ const RegisterScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      name === '' ||
-      email === '' ||
-      password === '' ||
-      confirmPassword === ''
-    ) {
-      setMessage('All fields are required');
-    }
     if (password !== confirmPassword) {
       setMessage('Passwords are not match');
     } else {
@@ -62,7 +54,7 @@ const RegisterScreen = () => {
       <h1>SIGN UP</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
-      {console.log(error)}
+      {console.log(message)}
       {loading && <Loader />}
       <Form onSubmit={handleSubmit}>
         <FormGroup controlId='name'>

@@ -35,6 +35,9 @@ userSchema.methods.matchPassword = async function (password) {
 
 //middlware to hash the password
 //so we have to pass next
+//why we check if modified first?
+//  use case:not creating new user. when client update info,-> go through this middleware.
+//  we dont want to hashing everytime. otherwise user cant log in.
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();

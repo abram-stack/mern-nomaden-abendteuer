@@ -17,6 +17,10 @@ const protect = async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JSON_SECRET);
 
         //set the req.user, means: the all protected route has the prop of req.user
+        //REVIEW: might want to include password-> allows user to update his password
+        //check if possible without incl. -password
+        //after REVIEW: possible to access req.user.password in other function
+        //no change made. if(bug with change pass) possibly here
         req.user = await User.findById(decoded.id).select('-password');
         next();
       } catch (error) {
