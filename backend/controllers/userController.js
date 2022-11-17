@@ -48,6 +48,36 @@ const getUserProfile = async (req, res) => {
   res.json({ user });
 };
 
+const updateUserProfile = async(req, res, next) => { 
+  try {
+    const user = req.user;
+    if (!user) {
+      res.status(400)
+      throw new Error('User not found')
+    }
+    const { name, email, password } = req.body;
+
+    //update the infos
+    if (name)
+      user.name = name
+    if (email)
+      user.email = email
+    if (password)
+      user.password = password
+    
+    await user.save();
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin
+      //REVIEW: new token needed?
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
 //@desc create user or user registration
 //@route POST/api/users
 //@access private
@@ -90,4 +120,4 @@ const createUser = async (req, res, next) => {
   }
 };
 
-export { authUser, getUsers, getUserProfile, createUser };
+export { authUser, getUsers, getUserProfile, createUser, updateUserProfile };
