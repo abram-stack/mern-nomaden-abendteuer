@@ -2,6 +2,7 @@ import express from 'express';
 import {
   authUser,
   createUser,
+  getUserById,
   getUserProfile,
   getUsers,
   updateUserProfile,
@@ -16,6 +17,8 @@ router
   .route('/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
+
+router.route('/:id').get(protect, getUserById);
 
 // POST
 router.route('/login').post(authUser);

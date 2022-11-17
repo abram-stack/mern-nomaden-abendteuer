@@ -38,6 +38,20 @@ const authUser = async (req, res, next) => {
   }
 };
 
+// @desc    Get user by ID
+// @route   GET /api/users/:id
+// @access  Private/Admin
+const getUserById = async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+}
+
 //@desc get user profile
 //@route GET/api/users/profile
 //@access private
@@ -45,7 +59,11 @@ const getUserProfile = async (req, res) => {
   //if we get the user, (that passed the test: user has the correct token) middleware
   //show user's info
   const user = req.user;
-  res.json({ user });
+  res.json({  
+    _id: user._id,
+    name: user.name,
+    email:user.email
+  });
 };
 
 const updateUserProfile = async(req, res, next) => { 
@@ -120,4 +138,4 @@ const createUser = async (req, res, next) => {
   }
 };
 
-export { authUser, getUsers, getUserProfile, createUser, updateUserProfile };
+export { authUser, getUsers, getUserProfile, createUser, updateUserProfile , getUserById};
