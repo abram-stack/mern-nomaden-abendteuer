@@ -33,12 +33,11 @@ const LoginScreen = () => {
   //we need location. (inside the params) useLocation
   //create redirect that has the value of if location.search ? location.search.split('=')[1] : '/'
   useEffect(() => {
-    if (userInfo) navigate('/');
+    if (userInfo) navigate(redirect);
   }, [navigate, userInfo, redirect]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //TODO: dispatch login
     dispatch(login(email, password));
   };
   return (

@@ -11,7 +11,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import Message from '../components/Message';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserDetail } from '../actions/userActions';
+import { getUserDetail, updateUserProfile } from '../actions/userActions';
 import Loader from '../components/Loader';
 
 const ProfileScreen = () => {
@@ -31,9 +31,9 @@ const ProfileScreen = () => {
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
-  //might find the bug: only read loading, one below then there is {user} double hierarchy
-  //or maybe it is a problem from the object return from the API
-  console.log(userDetails);
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
   useEffect(() => {
     console.log('user: ', user);
@@ -53,11 +53,11 @@ const ProfileScreen = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // if (password !== confirmPassword) {
-    //   setMessage('Passwords are not match');
-    //   else {
-    //     //disptach update
-    //   }
+    if (password !== confirmPassword) {
+      setMessage('Passwords are not match');
+    } else {
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
+    }
   };
 
   return (
@@ -66,6 +66,7 @@ const ProfileScreen = () => {
         <h1>PROFILE</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
+        {success && <Message variant='success'>Profile Updated</Message>}
         {loading && <Loader />}
 
         <Form onSubmit={handleSubmit}>
